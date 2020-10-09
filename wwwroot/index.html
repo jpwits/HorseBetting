@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html ng-app="inspinia">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title set in pageTitle directive -->
+    <title page-title></title>
+
+    <!-- Bootstrap -->
+    <link href="./js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="./lib/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/css/foundation.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+    <!-- Font awesome -->
+    <link href="./lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Main Inspinia CSS files -->
+    <link href="./css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="css/style.css" rel="stylesheet">
+
+
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body ng-controller="MainCtrl as main" class="{{$state.current.data.specialClass}}" landing-scrollspy id="page-top">
+
+    <!-- Main view  -->
+    <div ng-controller="AccountCtrl" ui-view></div>
+
+    <!-- jQuery and Bootstrap -->
+
+    <script src="./lib/jquery/jquery.min.js"></script>
+    <script src="./lib/jqueryui/jquery-ui.min.js"></script>
+    <script src="./js/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- MetsiMenu -->
+    <script src="./lib/metisMenu/metisMenu.min.js"></script>
+
+    <!-- SlimScroll -->
+    <script src="./lib/jQuery-slimScroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Peace JS -->
+    <script src="./lib/pace/pace.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="./js/inspinia.js"></script>
+
+    <!-- Main Angular scripts-->
+    <script src="./lib/angular.js/angular.min.js"></script>
+    <script src="./lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="./lib/oclazyload/ocLazyLoad.min.js"></script>
+    <script src="./lib/angular-translate/angular-translate.min.js"></script>
+    <script src="./lib/angular-ui-router/angular-ui-router.min.js"></script>
+    <script src="./lib/angular-ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="./lib/angular-resource/angular-resource.min.js"></script>
+    <script src="./lib/ng-idle/angular-idle.min.js"></script>
+    <script src="./lib/dataTables/datatables.min.js"></script>
+    <script src="./lib/angular-datatables/angular-datatables.min.js"></script>
+    <script src="./lib/angular-datatables/plugins/buttons/angular-datatables.buttons.min.js"></script>
+    <script src="./lib/danialfarid-angular-file-upload/ng-file-upload.min.js"></script>
+    <script src="./lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="./lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="./lib/ngStorage/ngStorage.js"></script>
+
+
+    <!-- Angular App Script -->
+    <script src="./js/app.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/translations.js"></script>
+    <script src="./js/directives.js"></script>
+    <script src="./js/services.js"></script>
+    <script src="./js/controllers/Main.js"></script>
+    <script src="./js/controllers/Account.js"></script>
+    <script src="./js/controllers/event.js"></script>
+    <script src="./js/controllers/Events.js"></script>
+    <script src="./js/controllers/tournament.js"></script>
+    <script src="./js/controllers/tournaments.js"></script>
+    <script src="./js/controllers/eventDetails.js"></script>
+    <script src="./js/controllers/eventDetail.js"></script>
+    <script src="./js/controllers.js"></script>
+</body>
+</html>

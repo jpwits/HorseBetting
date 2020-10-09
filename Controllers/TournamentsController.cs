@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using HorseBetting.Entities;
+using iCollect.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace iCollect.Controllers
+{
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]"), Produces("application/json"), EnableCors("AppPolicy")]
+    public class TournamentsController : Controller
+    {
+        private readonly HorseBettingContext _context;
+
+        public TournamentsController(HorseBettingContext context)
+        {
+            _context = context;
+        }
+
+        //[Authorize(Roles = "Admin")]
+        [HttpGet, Route("getTournaments")]
+        public ActionResult getTournaments()
+        {
+            try
+            {
+                System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+                var username = User.Identities.First().Name;
+                bool IsAdmin = currentUser.IsInRole("Admin");
+                var tournaments = _context.Tournament.ToList();
+
+                return Json(new
+                {
+                    tournaments
+                });
+            }
+            catch (Exception ex)
+            {
+                // _logger.LogError(ex, "Error occured on update set");
+                throw new NotImplementedException(ex.Message);
+            }
+        }
+
+        // [Authorize(Roles = "Admin")]
+        [HttpPut("updateTournament")]
+        public ActionResult<int> updateTournament([FromBody] Tournament data)
+        {
+            try
+            {
+                _context.Update(data);
+                int rc = _context.SaveChanges();
+                return rc;
+            }
+            catch (Exception ex)
+            {
+                // _logger.LogError(ex, "Error occured on update set");
+                throw new NotImplementedException(ex.Message);
+            }
+        }
+    }
+}

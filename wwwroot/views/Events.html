@@ -1,0 +1,103 @@
+﻿<div ng-controller="EventsCtrl">
+    <div class="row wrapper bSet-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>Event list</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Event list</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>
+                                All events assigned to Tournament :
+                                <span style="color:dodgerblue">
+                                    {{$sessionStorage.tournament.tournamentName}}
+                                </span>
+                            </h5>
+                            <div style="float: right;">
+                                <a ng-click="createEvent()" ng-show="ifAdmin();" class="btn btn-primary dim">Create Event</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            View <select ng-model="$localStorage.session_pglen" ng-change="setItemsPerPage($localStorage.session_pglen)"><option>10</option><option>20</option><option>50</option><option>100</option><option>200</option><option>500</option><option>1000</option></select> records at a time. 
+                            [Total Sets : {{$sessionStorage.iColSets.recordsTotal}}]
+                            <!-- <div>Page: {{$sessionStorage.currentPage}} / {{$sessionStorage.numberOfPages}} - [{{$sessionStorage.events.recordsTotal}}]</div>-->
+                            <br />
+                            <ul uib-pagination total-items="$sessionStorage.events.recordsTotal" items-per-page="$localStorage.session_pglen" ng-model="$sessionStorage.currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></ul>
+
+                            <div class="div-table fadeInRight">
+                                <!--Header-->
+                                <div class="div-table-row">
+                                    <div class="div-table-col">
+                                        <strong>Event Name</strong>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <strong>Event Number</strong>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <strong>Event Date Time</strong>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <strong>Event End Date Time</strong>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <strong>Auto Close</strong>
+                                    </div>
+                                </div>
+
+                                <!--Details-->
+                                <div ng-show="spinLoadingEvents == true">
+                                    <i style="font-size: 30px;" class="glyphicon glyphicon-refresh spinning"></i>
+                                </div>
+                                <div ng-repeat="event in $sessionStorage.events" class="div-table-row">
+                                    <div class="div-table-col">
+                                        <a href="" ng-click="selectEvent(event)">{{event.eventName}}</a>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <span>{{event.eventNumber}}</span>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <span>{{event.eventDateTime}}</span>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <span ng-if="event.eventEndDateTime == null">-</span>
+                                        <span>{{event.eventEndDateTime}}</span>
+                                    </div>
+                                    <div class="div-table-col">
+                                        <span ng-if="event.autoClose == null">-</span>
+                                        <span>{{event.autoClose}}</span>
+                                    </div>
+
+                                    <div class="div-table-col">
+                                        <button id="favBtn" ng-click="editEvent(event);" class="btn btn-info dim" type="button" tooltip-placement="bottom" uib-tooltip="Edit/Delete {{event.eventName}}">
+                                            <i id="favIcon" class="fa fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <ul uib-pagination total-items="$sessionStorage.events.recordsTotal" items-per-page="$localStorage.session_pglen" ng-model="$sessionStorage.currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></ul>
+                            </div>
+                            <!--<div class="div-table-row">
+                                <h5>params</h5>
+                                <pre>{{$sessionStorage | json}}</pre>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />

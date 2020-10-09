@@ -1,0 +1,57 @@
+﻿<div ng-controller="TournamentCtrl">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>Tournament</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="..\"> Home </a>
+                </li>
+                <li>
+                    <a href="..\"> Tournaments </a>
+                </li>
+                <li class="active">
+                    <strong>{{$state.$current.data.pageTitle}}</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <form class="m-t" role="form" ng-submit="updateTournament($sessionStorage.tournament)">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="idTournamentsName">Name:</label>
+            <div class="col-sm-6">
+                <input class="input-sm form-control" id="idTournamentsName" type="text" name="input" required=""
+                       ng-model="$sessionStorage.tournament.tournamentName">
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-success dim pull-left" ng-click="goBack();">
+            <i class="fa fa-arrow-left"></i>
+            Cancel
+        </button>
+
+        <button type="submit" class="btn btn-primary dim">
+            <span ng-show="spinUpdateTournament == 'Saving'">
+                <i class="glyphicon glyphicon-refresh spinning"></i>
+            </span>
+            <span ng-show="spinUpdateTournament != 'Saving'">
+                <i class="glyphicon glyphicon-save"></i>
+            </span>
+            {{ spinUpdateTournament }}
+        </button>
+
+        <button style="float:right" id="favBtn" ng-click="deleteTournament($sessionStorage.tournament);" class="btn btn-danger dim" type="button" tooltip-placement="bottom" uib-tooltip="Delete">
+            <i id="favIcon" class="fa fa-trash"></i>
+            Remove
+        </button>
+    </form>
+    <p class="m-t"> <small>CC &copy; 2020</small> </p>
+</div>
+
+
+
+
+
+
+
+
