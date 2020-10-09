@@ -1,4 +1,4 @@
-﻿function EventDetailCtrl($window, $scope, $state, $stateParams, $sessionStorage, updateEventDetailService) {
+﻿function EventDetailCtrl($window, $scope, $state, $stateParams, $sessionStorage, updateEventDetailService, delEventDetailService) {
     $scope.spinUpdateEventDetail = "Save";
 
     $sessionStorage.eventDetail = $stateParams.eventDetail;
@@ -13,6 +13,14 @@
             $scope.spinUpdateEventDetail = "Save";
             $sessionStorage.iComsErr = JSON.parse(JSON.stringify(error));
             alert("Error " + $sessionStorage.iComsErr.status + " Updating Event Detail : " + $sessionStorage.iComsErr.data);
+        });
+    };
+
+    $scope.deleteEventDetail = (eventDetail) => {
+        delEventDetailService.delEventDetail($sessionStorage.User.token).get({ eventDetailId: eventDetail.eventDetailId }).$promise.then(function (response) {
+            $window.history.back();
+        }, function (error) {
+            alert("Error retrieving lookups : " + error);
         });
     };
 

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Z.EntityFramework.Plus;
 using Newtonsoft.Json.Linq;
 using HorseBetting.Entities;
+using Microsoft.Data.SqlClient;
 
 namespace iCollect.Controllers
 {
@@ -70,6 +71,24 @@ namespace iCollect.Controllers
                 int rc = _context.SaveChanges();
 
                 return rc;
+            }
+            catch (Exception ex)
+            {
+                // _logger.LogError(ex, "Error occured on update set");
+                throw new NotImplementedException(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("deleteEvent/{eventId}")]
+        public ActionResult<int> deleteEvent(int eventId)
+        {
+            try
+            {
+                var par_eventId = new SqlParameter("@eventId", eventId);
+                var result = _context.Database.ExecuteSqlRaw("EXEC spDeleteEvent @eventId", par_eventId);
+
+                return result;
             }
             catch (Exception ex)
             {

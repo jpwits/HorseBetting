@@ -1,9 +1,13 @@
-﻿function EventCtrl($window, $scope, $state, $stateParams, $sessionStorage, updateEventService) {
+﻿function EventCtrl($window, $scope, $state, $stateParams, $sessionStorage, updateEventService, delEventService) {
     $sessionStorage.event = $stateParams.event;
-    $sessionStorage.event.eventDateTime = new Date($sessionStorage.event.eventDateTime);
-
-    if ($sessionStorage.event.eventEndDateTime !== null) {
-        $sessionStorage.event.eventEndDateTime = new Date($sessionStorage.event.eventEndDateTime);
+    if ($sessionStorage.event.eventDateTime !== undefined) {
+         $sessionStorage.event.eventDateTime = new Date($sessionStorage.event.eventDateTime);
+    }
+  
+    if ($sessionStorage.event.eventDateTime !== undefined) {
+        if ($sessionStorage.event.eventEndDateTime !== null) {
+            $sessionStorage.event.eventEndDateTime = new Date($sessionStorage.event.eventEndDateTime);
+        }
     }
     $scope.spinUpdateEvent = "Save";
 
@@ -22,9 +26,13 @@
         });
     };
 
-    $scope.deleteEvent = function (set) {
-        if (confirm('Are you sure you want to delete this set?!!!')) {
-            alert("Delete Event");
+    $scope.deleteEvent = function (event) {
+        if (confirm('Are you sure you want to delete this event?!!!')) {
+            delEventService.delEvent($sessionStorage.User.token).get({ eventId: event.eventId }).$promise.then(function (response) {
+                $window.history.back();
+            }, function (error) {
+                alert("Error deleteing event : " + error);
+            });
         }
     };
 

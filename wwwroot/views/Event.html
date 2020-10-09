@@ -67,7 +67,9 @@
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="openEnd()"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
-                                    {{$sessionStorage.event.eventEndDateTime.toTimeString().substr(0,8)}}
+                                    <span ng-show="$sessionStorage.event.eventEndDateTime != null">
+                                        {{$sessionStorage.event.eventEndDateTime.toTimeString().substr(0,8)}}
+                                    </span>
                                 </p>
                             </div>
                         </div>

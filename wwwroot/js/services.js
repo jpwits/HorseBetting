@@ -100,6 +100,55 @@ function updateEventDetailService($resource, token) {
     );
 }
 
+
+function delTournamentService($resource) {
+    return {
+        delTournament: function (token) {
+            return $resource('api/Tournaments/deleteTournament/:tournamentId',
+                { tournamentId: '@tournamentId' }, {
+                query: {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                }
+            });
+        }
+    }
+}
+
+function delEventService($resource) {
+    return {
+        delEvent: function (token) {
+            return $resource('api/Events/deleteEvent/:eventId',
+                { eventId: '@eventId' }, {
+                query: {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                }
+            });
+        }
+    }
+}
+
+function delEventDetailService($resource) {
+    return {
+        delEventDetail: function (token) {
+            return $resource('api/EventDetails/deleteEventDetail/:eventDetailId',
+                { eventDetailId: '@eventDetailId' }, {
+                query: {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                }
+            });
+        }
+    }
+}
+
 function authUser($resource) {
     return $resource('api/Account/authenticate'
         , {
@@ -125,8 +174,6 @@ function getRoles($resource) {
 
 angular
     .module('inspinia')
-   
-    
     .service('getTournamentsService', ['$resource', getTournamentsService])
     .service('getEventsService', ['$resource', getEventsService])
     .service('getEventDetailsService', ['$resource', getEventDetailsService])
@@ -134,6 +181,9 @@ angular
     .service('updateTournamentService', ['$resource', updateTournamentService])
     .service('updateEventService', ['$resource', updateEventService])
     .service('updateEventDetailService', ['$resource', updateEventDetailService])
+    .service('delEventDetailService', ['$resource', delEventDetailService])
+    .service('delEventService', ['$resource', delEventService])
+    .service('delTournamentService', ['$resource', delTournamentService])
     .service('authUser', authUser)
     .service('logoutUser', logoutUser)
     .service('registerUser', registerUser)

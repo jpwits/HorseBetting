@@ -42,7 +42,6 @@
     $scope.logout = function () {
         logoutUser.get().$promise.then(function (response) {
             $sessionStorage.User = undefined;
-            //$window.history.back();
             $state.go('dashboards.dashboard_4_1');
         }, function (error) {
             $sessionStorage.iComsErr = JSON.parse(JSON.stringify(error));
